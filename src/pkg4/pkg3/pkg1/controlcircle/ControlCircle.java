@@ -9,7 +9,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -29,8 +31,8 @@ public class ControlCircle extends Application {
        //Creating buttons
        Button btnEnlarge = new Button("Enlarge");
        Button btnShrink = new Button("Shrink");
-       btnEnlarge.setAlignment(Pos.BOTTOM_LEFT);
-       btnShrink.setAlignment(Pos.BOTTOM_RIGHT);
+       btnEnlarge.setAlignment(Pos.CENTER);
+       btnShrink.setAlignment(Pos.CENTER);
        
        //Creating a circle
        Circle circle = new Circle();
@@ -40,13 +42,18 @@ public class ControlCircle extends Application {
        circle.setFill(Color.TRANSPARENT);
        circle.setStroke(Color.web("#0A0A0A"));
        
-       //Creating a GridPane
-       GridPane gridPane = new GridPane();
-       gridPane.add(circle, 1, 0, 1, 1);
-       gridPane.add(btnEnlarge, 0, 2, 1, 1);
-       gridPane.add(btnShrink, 2, 2, 1, 1);
-       gridPane.setHgap(10);
-       gridPane.setVgap(10);
+       //Creating an HBox
+       HBox hbox = new HBox(2);
+       hbox.getChildren().add(btnEnlarge);
+       hbox.getChildren().add(btnShrink);
+       HBox.setMargin(btnEnlarge, new Insets(0, 100, 10, 150));
+       HBox.setMargin(btnShrink, new Insets(0, 100, 10, 100));
+       
+              
+       //Creating a Borderpane
+       BorderPane borderPane = new BorderPane();
+       borderPane.setBottom(hbox);
+       borderPane.setCenter(circle);
        
        //Button Event
         btnEnlarge.setOnAction(new EventHandler<ActionEvent>() {
@@ -64,8 +71,8 @@ public class ControlCircle extends Application {
        });
        
        //Creating a scene object
-       Scene scene = new Scene(gridPane, 600, 350);
-       gridPane.setAlignment(Pos.CENTER);
+       Scene scene = new Scene(borderPane, 600, 350);
+       
        
        
        
